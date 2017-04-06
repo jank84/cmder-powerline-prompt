@@ -158,6 +158,9 @@ end
 
 --make prompt slower ! ~500ms
 function get_git_commit_trail()
+	if (not get_git_dir()) then 
+		return ""
+	end
 	local currentCommitTrail = ""
 	--get current branch
 	local currentBranchF = io.popen("git rev-parse --abbrev-ref HEAD")
