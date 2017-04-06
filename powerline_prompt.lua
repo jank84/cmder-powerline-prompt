@@ -3,8 +3,9 @@
 -- Resets the prompt 
 function lambda_prompt_filter()
     cwd = clink.get_cwd()
-    prompt = "\x1b[37;44m{cwd} {git}{hg}\n\x1b[1;30;40m{lamb} \x1b[0m"
+    prompt = "\x1b[33;44m{time} \x1b[37;44m{cwd} {git}{hg}\n\x1b[1;30;40m {lamb} \x1b[0m"
     new_value = string.gsub(prompt, "{cwd}", cwd)
+	new_value = string.gsub(new_value, "{time}", os.date("%H:%M:%S"))
     clink.prompt.value = string.gsub(new_value, "{lamb}", "λ")
 end
 
@@ -155,6 +156,13 @@ function get_git_status()
     return true
 end
 
+function get_git_commit_trail()
+	local file = io.popen("git rev-list --count master...origin/master")
+ 
+    return "0"
+end
+
+
 -- adopted from clink.lua
 -- Modified to add colors and arrow symbols
 function colorful_git_prompt_filter()
@@ -167,6 +175,7 @@ function colorful_git_prompt_filter()
 
     local closingcolors = {
         clean = " \x1b[32;40m"..arrowSymbol,
+		--dirty = "±"..get_git_commit_trail().." \x1b[33;40m"..arrowSymbol,
         dirty = "± \x1b[33;40m"..arrowSymbol,
     }
 
@@ -174,6 +183,7 @@ function colorful_git_prompt_filter()
     if git_dir then
         -- if we're inside of git repo then try to detect current branch
         local branch = get_git_branch(git_dir)
+		-- local numOfCommits = get_git_commit_trail()
         if branch then
             -- Has branch => therefore it is a git folder, now figure out status
             if get_git_status() then
