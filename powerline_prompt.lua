@@ -156,10 +156,24 @@ function get_git_status()
     return true
 end
 
+--make prompt slower ! ~500ms
 function get_git_commit_trail()
-	local file = io.popen("git rev-list --count master...origin/master")
- 
-    return "0"
+	local currentCommitTrail = ""
+	--get current branch
+	local currentBranchF = io.popen("git rev-parse --abbrev-ref HEAD")
+	for currentBranchline in currentBranchF:lines() do
+		--get commit diff between local - origin
+		local currentCommitTrailF = io.popen("git rev-list --count "..currentBranchline.."...origin/"..currentBranchline.. "  2>nul")
+		for currentCommitTrailFline in currentCommitTrailF:lines() do
+			currentCommitTrail = currentCommitTrailFline
+		end
+		currentCommitTrailF:close()
+    end
+	currentBranchF:close()
+	if currentCommitTrail == "0" then
+		currentCommitTrail = ""
+	end
+    return currentCommitTrail
 end
 
 
@@ -175,8 +189,8 @@ function colorful_git_prompt_filter()
 
     local closingcolors = {
         clean = " \x1b[32;40m"..arrowSymbol,
-		--dirty = "±"..get_git_commit_trail().." \x1b[33;40m"..arrowSymbol,
-        dirty = "± \x1b[33;40m"..arrowSymbol,
+		dirty = "±"..get_git_commit_trail().." \x1b[33;40m"..arrowSymbol,
+        --dirty = "± \x1b[33;40m"..arrowSymbol,
     }
 
     local git_dir = get_git_dir()
