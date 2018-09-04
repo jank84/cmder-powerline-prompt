@@ -30,8 +30,7 @@ echo "You may want to DL 'https://github.com/ryanoasis/nerd-fonts/raw/master/pat
 echo "See https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#step-2-install-a-powerline-font"
 echo "[optional] for hyper.is change line to 'fontFamily: '"Hack Nerd Font", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace','"
 echo "-----------------------"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 ~/.fzf/install
