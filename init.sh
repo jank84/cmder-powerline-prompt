@@ -57,6 +57,8 @@ sudo apt-get install httpie
 
 echo "install ncdu (directory size)"
 sudo apt-get install ncdu
+alias du="ncdu -rr -x --exclude .git --exclude node_modules"
+
 
 echo "-----------------------"
 echo "You may want to DL 'https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf'"
