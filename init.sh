@@ -48,9 +48,15 @@ sudo mv prettyping /usr/bin
 sudo chmod +x /usr/bin/prettyping
 alias ping='prettyping'
 
-echo "install htop > top"
+echo "install htop > top (task mgn)"
 sudo apt-get install htop
 alias top='htop'
+
+echo "install httpie (http client)"
+sudo apt-get install httpie
+
+echo "install ncdu (directory size)"
+sudo apt-get install ncdu
 
 echo "-----------------------"
 echo "You may want to DL 'https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf'"
