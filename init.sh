@@ -41,16 +41,19 @@ wget -O "$TEMP_DEB" 'https://github.com/sharkdp/bat/releases/download/v0.7.1/bat
 sudo dpkg -i "$TEMP_DEB"
 rm -f "$TEMP_DEB"
 alias cat='bat'
+echo 'alias cat='bat'' >> ~/.zshrc
 
 echo "prettyping > ping"
 curl -O https://raw.githubusercontent.com/denilsonsa/prettyping/master/prettyping
 sudo mv prettyping /usr/bin
 sudo chmod +x /usr/bin/prettyping
 alias ping='prettyping'
+echo 'alias ping='prettyping'' >> ~/.zshrc
 
 echo "install htop > top (task mgn)"
 sudo apt-get install htop
 alias top='htop'
+echo 'alias top='htop'' >> ~/.zshrc
 
 echo "install httpie (http client)"
 sudo apt-get install httpie
@@ -58,6 +61,7 @@ sudo apt-get install httpie
 echo "install ncdu (directory size)"
 sudo apt-get install ncdu
 alias du="ncdu -rr -x --exclude .git --exclude node_modules"
+echo 'alias du="ncdu -rr -x --exclude .git --exclude node_modules"' >> ~/.zshrc
 
 
 echo "-----------------------"
